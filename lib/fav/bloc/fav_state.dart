@@ -17,3 +17,5 @@ class FavSuccess extends FavState {
 }
 
 class FavError extends FavState {}
+
+class FavLoading extends FavState {}

@@ -12,17 +12,18 @@ class FavBloc extends Bloc<FavEvent, FavState> {
   }
 
   Future<void> getList(event, emit) async {
+    emit(FavLoading());
     try {
-      var queryUser = await FirebaseFirestore.instance
+      var user = await FirebaseFirestore.instance
           .collection("users")
           .doc("${FirebaseAuth.instance.currentUser.uid}");
 
-      var docsRef = await queryUser.get();
-      List<dynamic> listIds = docsRef.data()["favoritos"] ?? [];
-      print(listIds);
-      emit(FavSuccess(list: listIds));
+      var docsRef = await user.get();
+      List<dynamic> list = docsRef.data()["favoritos"] ?? [];
+      print(list);
+      emit(FavSuccess(list: list));
     } catch (e) {
-      print("Error al obtener todos los items");
+      print("Error al obtener los items");
       emit(FavError());
     }
   }

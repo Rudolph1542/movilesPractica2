@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practica2/actual/actualPage.dart';
+import 'package:practica2/actual/decactualPage.dart';
 import 'package:practica2/fav/bloc/fav_bloc.dart';
 import 'package:practica2/favoritos/decfavPage.dart';
 import 'package:practica2/favoritos/favPage.dart';
@@ -63,43 +64,18 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 100,
           ),
-          BlocConsumer<SongBloc, SongState>(
-            listener: (context, state) {
-              if (state is SongSuccess) {
-                print(state.mapa['title']);
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => Actual(
-                        cancion: state.mapa['title'],
-                        album: state.mapa['album'],
-                        foto: state.mapa['spotify']['album']['images'][0]
-                            ['url'],
-                        artista: state.mapa['artist'],
-                        urlAPI: state.mapa['song_link'],
-                        spotifyURL: state.mapa['spotify']['external_urls']
-                            ['spotify'],
-                        appleURL: state.mapa['apple_music']['url'],
-                        fecha: state.mapa['release_date'])));
-              } else if (state is SongErrorState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Canción no detectada'),
-                  ),
-                );
-              }
+          ElevatedButton(
+            onPressed: () {
+              BlocProvider.of<SongBloc>(context).add(SongListen());
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => DecActualPage()));
             },
-            builder: (context, state) {
-              return ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<SongBloc>(context).add(SongListen());
-                },
-                child: Image.asset('assets/musica.png', height: 145),
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(165, 165),
-                    shape: CircleBorder(),
-                    primary: Colors.white,
-                    onPrimary: Colors.black),
-              );
-            },
+            child: Image.asset('assets/musica.png', height: 145),
+            style: ElevatedButton.styleFrom(
+                fixedSize: Size(165, 165),
+                shape: CircleBorder(),
+                primary: Colors.white,
+                onPrimary: Colors.black),
           ),
           SizedBox(
             height: 50,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practica2/fav/bloc/fav_bloc.dart';
 import 'package:practica2/favoritos/favPage.dart';
+import 'package:practica2/home/homepage.dart';
 
 class DecFavPAge extends StatefulWidget {
   DecFavPAge({Key key}) : super(key: key);
@@ -30,10 +31,12 @@ class _DecFavPAgeState extends State<DecFavPAge> {
             return Center(
               child: Text('error'),
             );
-          } else {
+          } else if (state is FavLoading) {
             return Center(
-              child: Text('cargando'),
+              child: Center(child: CircularProgressIndicator()),
             );
+          } else {
+            return HomePage();
           }
         },
       ),

@@ -58,6 +58,11 @@ class _ActualState extends State<Actual> {
                       artista: widget.artista,
                       foto: widget.foto,
                       urlAPI: widget.urlAPI));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Ya se agregó a favoritos'),
+                    ),
+                  );
                 },
                 child: Text('Agregar'))
           ],
@@ -82,9 +87,6 @@ class _ActualState extends State<Actual> {
         body: Center(
           child: Column(
             children: [
-              SizedBox(
-                height: 20,
-              ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Image(

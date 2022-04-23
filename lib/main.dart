@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practica2/agregar/bloc/agregar_bloc.dart';
 import 'package:practica2/auth/bloc/auth_bloc.dart';
+import 'package:practica2/eliminar/bloc/eliminar_bloc.dart';
 import 'package:practica2/fav/bloc/fav_bloc.dart';
 import 'package:practica2/home/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +26,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => FavBloc()..add(getListaFav()),
+        ),
+        BlocProvider(
+          create: (context) => EliminarBloc()..add(EliminarSong()),
         ),
       ],
       child: MyApp(),
